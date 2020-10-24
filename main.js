@@ -1,16 +1,13 @@
 "use strict";
 
-const canvas = document.getElementById("canvas");
-const file = document.getElementById("file");
-const span = document.getElementById("pasted-image");
-canvas.width = 0.8 * window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-canvas.height = 0.8 * window.innerHeight|| document.documentElement.clientHeight|| document.body.clientHeight;
-
-
 function handlePastedImage(event) {
   console.log(event);
   span.style.color = "black";
   span.innerHTML = "Image Pasted";
+
+  background.src = event.target.result;
+
+  h = true;
 
   // Clear the file input
   file.value = '';
@@ -25,54 +22,20 @@ function handleFile(event) {
 
   file.style.color = "black";
 
-  console.log(file);
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    background.src = e.target.result;
+    h = true;
+  }
+  reader.readAsDataURL(file.files[0]);
 }
 file.onchange = handleFile;
 
-function getCursorPosition(event) {
-  const rect = canvas.getBoundingClientRect();
-  const x = Math.round(event.clientX - rect.left);
-  const y = Math.round(event.clientY - rect.top);
-  if (x < 0 || x > rect.width || y < 0 || y > rect.height) {
-    return [-1, -1];
-  }
+// Initially size the canvas
+resize();
 
-  console.log(x, y);
-
-  return [x, y];
-}
-
-let tempClick = null;
-
-function mouseDown(event) {
-  if (!tempClick) {
-    return;
-  }
-  const coords = getCursorPosition(event);
-
-  if (coords[0] == -1 || coords[1] == -1) {
-    console.log("Clearing");
-    tempClick = null;
-  } else {
-    console.log("Setting");
-    tempClick = coords;
-  }
-}
-canvas.addEventListener('mousedown', function(event) {
-  tempClick = true;
-  mouseDown(event);
-});
-canvas.addEventListener('mousemove', function(event) {
-  mouseDown(event);
-});
-
-function mouseUp() {
-  // TODO add to list of points.
-  tempClick = false;
-}
-window.addEventListener('mouseup', function(event) {
-  mouseUp();
-});
+// Start the loop
+frame();
 
 // Credit to https://stackoverflow.com/a/6338207/13372610
 document.onpaste = function(event){
@@ -89,4 +52,3 @@ document.onpaste = function(event){
   }
 }
 
-console.log(canvas);
