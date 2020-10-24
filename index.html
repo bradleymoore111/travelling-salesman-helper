@@ -1,0 +1,20 @@
+<html>
+  <head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<title>Hello World!</title>
+  </head>
+  <body style="text-align: center; padding-top: 1%;">
+	<div style="display: flex; align-items: center; justify-content: center">
+	  <div style="text-align: right; padding-right: 20px;">
+		<label for="file">(Optionally) Enter a background image:</label><br>
+		<label>(Optionally) Or paste a background image:</label>
+	  </div>
+	  <div style="text-align: left;">
+		<input type="file" id="file" name="file" accept="image/png, image/jpeg, image/jpg" style="color: grey"><br>
+		<span id="pasted-image" style="color: grey">No image given</span>
+	  </div>
+	</div>
+	<canvas id="canvas" style="margin-top: 1%; border: 1px solid black"></canvas>
+	<script src="main.js"></script>
+  </body>
+</html>
