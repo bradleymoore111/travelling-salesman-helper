@@ -1,7 +1,7 @@
 const points = [];
 function addPoint(pos) {
 	points.push(pos);
-	estimateSalesmanPath();
+	estimateSalesmanPath(document.getElementById("select-solver").value);
 }
 
 function getPoints() {
@@ -13,7 +13,7 @@ function getEdges() {
 	return edges;
 }
 
-function estimateSalesmanPath() {
+function estimateSalesmanPath(method) {
 	// Return a list of edges that are included.
 	// Convert points to list of tuples
 	const convertedPoints = [];
@@ -21,7 +21,23 @@ function estimateSalesmanPath() {
 		convertedPoints.push([p.x, p.y]);
 	}
 
-	const tour = ChristofidesSerdyukovApproximate(convertedPoints);
+	let tour;
+
+	if (method == "auto") {
+		if (points.length < 20) {
+			method = "dynamic";
+		} else {
+			method = "christofides-serdyukov";
+		}
+	}
+
+	if (method == "christofides-serdyukov") {
+		console.log("CS");
+		tour = ChristofidesSerdyukovApproximate(convertedPoints);
+	} else {
+		console.log("DS");
+		tour = DynamicExactTSPSolver(convertedPoints);
+	}
 
 	console.log("Found tour:", tour);
 

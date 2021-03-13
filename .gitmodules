@@ -1,3 +1,6 @@
 [submodule "christofides-serdyukov"]
 	path = christofides-serdyukov
 	url = https://github.com/bradleymoore111/christofides-serdyukov
+[submodule "easy-exact-TSP"]
+	path = easy-exact-TSP
+	url = https://github.com/bradleymoore111/easy-exact-TSP

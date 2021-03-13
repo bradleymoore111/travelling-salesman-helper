@@ -7,17 +7,27 @@
 	<div style="display: flex; align-items: center; justify-content: center">
 	  <div style="text-align: right; padding-right: 20px;">
 		<label for="file">(Optionally) Enter a background image:</label><br>
-		<label>(Optionally) Or paste a background image:</label>
+		<label>(Optionally) Or paste a background image:</label><br>
+		<label>Select a solver method</label>
 	  </div>
 	  <div style="text-align: left;">
 		<input type="file" id="file" name="file" accept="image/png, image/jpeg, image/jpg" style="color: grey"><br>
-		<span id="pasted-image" style="color: grey">No image given</span>
+		<span id="pasted-image" style="color: grey">No image given</span><br>
+		<select id="select-solver">
+			<option value="auto">Auto</option>
+			<option value="christofides-serdyukov">Christofides-Serdyukov (fast)</option>
+			<option value="exact">Exact Solver (slowest)</option>
+		</select>
 	  </div>
 	</div>
 	<canvas id="canvas" style="margin-top: 1%; border: 1px solid black"></canvas>
+	
 	<script src="christofides-serdyukov/blossom.js"></script>
 	<script src="christofides-serdyukov/eulerian-trail.js"></script>
 	<script src="christofides-serdyukov/christofides-serdyukov.js"></script>
+
+	<script src="easy-exact-TSP/dynamic-TSP.js"></script>
+
 	<script src="salesman-stuff.js"></script>
 	<script src="canvas-stuff.js"></script>
 	<script src="main.js"></script>
